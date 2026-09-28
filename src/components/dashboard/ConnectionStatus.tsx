@@ -15,9 +15,9 @@ export function ConnectionStatus({ isConnected, selectedServer, onToggleConnecti
         <div className="flex items-center space-x-4">
           <Shield className={`h-8 w-8 ${isConnected ? 'text-green-500' : 'text-gray-400'}`} />
           <div>
-            <h2 className="text-xl font-semibold">VPN Status</h2>
+            <h2 className="text-xl font-semibold">VPN Demo Status</h2>
             <p className={`text-sm ${isConnected ? 'text-green-500' : 'text-gray-500'}`}>
-              {isConnected ? `Connected to ${selectedServer?.name}` : 'Not Connected'}
+              {isConnected ? `Simulating connection to ${selectedServer?.name}` : 'Simulation disconnected'}
             </p>
           </div>
         </div>
@@ -28,7 +28,7 @@ export function ConnectionStatus({ isConnected, selectedServer, onToggleConnecti
           }`}
         >
           <Power className="h-5 w-5 mr-2" />
-          {isConnected ? 'Disconnect' : 'Connect'}
+          {isConnected ? 'Stop simulation' : 'Simulate connection'}
         </button>
       </div>
     </div>
