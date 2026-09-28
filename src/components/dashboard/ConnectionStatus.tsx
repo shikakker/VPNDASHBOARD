@@ -22,13 +22,27 @@ export function ConnectionStatus({ isConnected, selectedServer, onToggleConnecti
           </div>
         </div>
         <button
+          type="button"
           onClick={onToggleConnection}
-          className={`flex items-center px-6 py-2 rounded-lg text-white ${
+          disabled={!isConnected && !selectedServer}
+          aria-pressed={isConnected}
+          aria-label={
+            isConnected
+              ? 'Stop VPN connection simulation'
+              : selectedServer
+                ? `Simulate connection to ${selectedServer.name}`
+                : 'Select a demo server before starting the simulation'
+          }
+          className={`flex items-center px-6 py-2 rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50 ${
             isConnected ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
           }`}
         >
           <Power className="h-5 w-5 mr-2" />
-          {isConnected ? 'Stop simulation' : 'Simulate connection'}
+          {isConnected
+            ? 'Stop simulation'
+            : selectedServer
+              ? 'Simulate connection'
+              : 'Select a server first'}
         </button>
       </div>
     </div>
