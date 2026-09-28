@@ -15,7 +15,7 @@ Draft PR: #2.
 | T06 | P1 | BLOCKED | Model connecting/connected/disconnecting/error states from the real transport. |
 | T07 | P1 | BLOCKED | Add kill-switch/DNS/leak semantics only if supported by the real VPN runtime. |
 | T08 | P1 | BLOCKED | Add tests for connection-state transitions against the selected bridge. |
-| T09 | P1 | BLOCKED | Add deterministic CI and hosted browser QA. |
+| T09 | P1 | DONE IN CODE | Added frozen install/audit/contracts/typecheck/lint/build CI; exact-head hosted execution remains pending. |
 | T10 | P1 | BLOCKED | Production deployment only after tunnel verification exists. |
 
 ## I01–I10
@@ -26,7 +26,7 @@ Draft PR: #2.
 | I03 | DONE | UI explicitly states no VPN tunnel is created or verified. |
 | I04 | BLOCKED | Authoritative connection telemetry. |
 | I05 | BLOCKED | Real auth/session lifecycle. |
-| I06 | BLOCKED | Error/recovery states from native/backend bridge. |
+| I06 | PARTIAL | Demo selection/no-op recovery is fixed; real transport error states still depend on the native/backend bridge. |
 | I07 | BLOCKED | Server-list provenance/freshness. |
 | I08 | DEFERRED WITH REASON | Security controls depend on actual VPN engine. |
 | I09 | DEFERRED WITH REASON | Performance depends on actual tunnel implementation. |
@@ -50,3 +50,11 @@ Draft PR: #2.
 - Trust-boundary fix: `91b564206a8ac64234453b11d222a339d40aa93f`.
 - Current hook only changes React state; there is no native VPN/tunnel call in `useVPNConnection`.
 - **Status: PARTIAL / SIMULATION.**
+
+## 2026-09-29 P1 — demo server selection and silent-action repair
+
+- The rendered `src/components/server/ServerList.tsx` now accepts the `onServerSelect` callback that `MainContent` already passes; selection no longer disappears into `console.log`.
+- The connection simulation button is disabled until a demo server exists, carries `aria-pressed`, and exposes an explicit accessible label.
+- The server list reiterates that selecting a server creates no real VPN tunnel.
+- Added source regression tests and frozen Node 22 Quality workflow.
+- Real VPN transport/tunnel verification remains intentionally BLOCKED until a native/backend VPN runtime is selected.
