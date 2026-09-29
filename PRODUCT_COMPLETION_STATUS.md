@@ -15,7 +15,7 @@ Draft PR: #2.
 | T06 | P1 | BLOCKED | Model connecting/connected/disconnecting/error states from the real transport. |
 | T07 | P1 | BLOCKED | Add kill-switch/DNS/leak semantics only if supported by the real VPN runtime. |
 | T08 | P1 | BLOCKED | Add tests for connection-state transitions against the selected bridge. |
-| T09 | P1 | DONE IN CODE | Added frozen install/audit/contracts/typecheck/lint/build CI; exact-head hosted execution remains pending. |
+| T09 | P1 | DONE | Exact-head frozen install/audit/tests/typecheck/lint/build Quality gate passes. |
 | T10 | P1 | BLOCKED | Production deployment only after tunnel verification exists. |
 
 ## I01–I10
@@ -58,3 +58,10 @@ Draft PR: #2.
 - The server list reiterates that selecting a server creates no real VPN tunnel.
 - Added source regression tests and frozen Node 22 Quality workflow.
 - Real VPN transport/tunnel verification remains intentionally BLOCKED until a native/backend VPN runtime is selected.
+
+## 2026-09-29 verification closure
+
+- Exact head `e281a8bcdb3b8ca484986927020f6f7eb42341ae`.
+- GitHub Quality run `36536221445`: **PASS**.
+- Executed successfully: `npm ci`, production dependency audit, contract tests, TypeScript, lint and Vite production build.
+- The real VPN transport/tunnel remains intentionally BLOCKED; this pass verifies the simulation application and release gate, not a native VPN engine.
