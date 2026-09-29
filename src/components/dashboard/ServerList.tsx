@@ -1,4 +1,3 @@
-import React from 'react';
 import { Globe, Signal } from 'lucide-react';
 
 type Server = {

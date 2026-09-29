@@ -1,4 +1,3 @@
-import React from 'react';
 import { ServerCard } from './ServerCard';
 import { servers } from '../../data/servers';
 import type { Server } from '../../types/server';
