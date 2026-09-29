@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Shield, Globe, Wifi } from 'lucide-react';
 import { Toggle } from '../ui/Toggle';
 import { Select } from '../ui/Select';

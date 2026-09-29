@@ -1,4 +1,3 @@
-import React from 'react';
 import { ConnectionStatus } from './ConnectionStatus';
 import { ServerList } from '../server/ServerList';
 import { SecuritySettings } from '../settings/SecuritySettings';
