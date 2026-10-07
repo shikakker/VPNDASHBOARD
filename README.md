@@ -1,146 +1,44 @@
-# VPN Dashboard
+# VPN Dashboard Prototype
 
-VPN service-management **frontend prototype** for sign-in, server selection, connection-state presentation, and dashboard UX.
+Frontend control-plane prototype for VPN product UX: server selection, connection-state presentation, and security-setting concepts.
 
-Live / historical deployment reference from the previous README:
+**This repository does not create a VPN tunnel.** It has no native VPN engine, traffic routing, encryption, DNS control, or production authentication.
 
-```text
-https://vpndashboad.whoisegor.ru
-```
-
-The current repository does **not** create a VPN tunnel. Authentication and VPN connection state are simulated entirely in React state.
-
-## Current product flow
+## Current flow
 
 ```text
-login form
-   |
-   v
-VPN dashboard
-   |
-   +-- choose server
-   +-- connect / disconnect
-   `-- connection state UI
+open demo dashboard
+  -> choose a sample server
+  -> simulate connection state
+  -> inspect disabled security-setting concepts
 ```
 
-## Authentication is simulated
+The previous fake sign-in form was removed because it collected email/password-like data without any authentication backend.
 
-`LoginForm.tsx` contains a clear TODO for real authentication.
+## Implemented
 
-The current behavior is:
+- explicit demo entry instead of fake credential collection;
+- server selection wired through the real component contract;
+- simulated connection / disconnection state;
+- clear warning that traffic is not encrypted or routed;
+- static server load / ping values labelled as demo telemetry;
+- keyboard-accessible server selection buttons;
+- disabled kill-switch / DNS / protocol controls;
+- responsive React dashboard.
 
-```text
-email is non-empty
-AND
-password is non-empty
-      |
-      v
-onLogin()
-      |
-      v
-isLoggedIn = true
-```
+## Not implemented
 
-No credentials are validated against a backend, identity provider, database, OAuth service, or session token.
-
-Therefore the sign-in screen is **UI only**, not a security boundary.
-
-## VPN connection is simulated
-
-`useVPNConnection.ts` maintains:
-
-```text
-isConnected
-selectedServer
-```
-
-in React state.
-
-Calling `connect(server)` simply:
-
-```text
-set selectedServer
-set isConnected = true
-```
-
-and `disconnect()` sets the boolean back to false.
-
-There is no implementation of:
-
-- WireGuard;
-- OpenVPN;
-- IPsec;
-- system VPN APIs;
-- TUN / TAP device;
-- proxy routing;
-- DNS configuration;
-- split tunneling;
-- server authentication;
+- WireGuard / OpenVPN / IKEv2 engine;
+- OS VPN APIs / TUN/TAP;
+- gateway infrastructure;
 - key exchange;
-- traffic encryption.
+- real server telemetry;
+- DNS routing;
+- kill switch;
+- authentication / subscriptions;
+- privacy / no-log enforcement.
 
-A green “connected” state in this UI does not mean network traffic is protected.
-
-## Browser limitation
-
-A normal React website cannot establish a system-level VPN tunnel by itself.
-
-A real VPN product would normally require a native / platform component, such as:
-
-- Android `VpnService`;
-- iOS Network Extension;
-- macOS Network Extension;
-- Windows VPN / WFP / native service;
-- desktop WireGuard / OpenVPN client integration;
-- browser extension or proxy only for browser-scoped traffic.
-
-The dashboard could remain the control plane while a native client performs the actual network work.
-
-## Intended architecture
-
-```text
-web / desktop dashboard
-       |
-       +-- account / subscription
-       +-- server catalog
-       +-- connection controls
-       |
-       v
-native VPN client / service
-       |
-       +-- key management
-       +-- tunnel protocol
-       +-- DNS
-       +-- routing
-       |
-       v
-VPN gateway
-       |
-       v
-internet
-```
-
-## Security requirements for a real product
-
-A production VPN service should define and test:
-
-- account authentication;
-- device authorization;
-- tunnel protocol;
-- ephemeral / long-lived key handling;
-- gateway identity;
-- DNS leak prevention;
-- IPv6 behavior;
-- kill-switch behavior;
-- split tunneling;
-- network change / reconnect logic;
-- logging and retention policy;
-- subscription / entitlement checks;
-- server health;
-- abuse controls;
-- client update security.
-
-Privacy claims should be tied to actual infrastructure and policy, not dashboard copy.
+A real VPN product requires a native/system client or service. A browser React app can be the control plane, not the tunnel engine.
 
 ## Tech stack
 
@@ -150,45 +48,35 @@ Privacy claims should be tied to actual infrastructure and policy, not dashboard
 - Tailwind CSS
 - Lucide React
 
-No VPN protocol library or native-networking SDK is present in the current package.
-
-## Local development
-
-### Requirements
-
-- Node.js 18+
-- npm
-
-### Install
+## Development
 
 ```bash
-git clone https://github.com/shikakker/VPNDASHBOARD.git
-cd VPNDASHBOARD
-npm install
-```
-
-Run:
-
-```bash
+npm ci
+npm run typecheck
+npm run lint
+npm run build
 npm run dev
 ```
 
-Build / lint / preview:
+## Verification
 
-```bash
-npm run lint
-npm run build
-npm run preview
+Product-completion branch:
+
+```text
+ai/product-completion/vpndashboard
 ```
+
+GitHub Actions verified the current runtime changes:
+
+```text
+npm ci      PASS
+typecheck   PASS
+lint        PASS
+build       PASS
+```
+
+Vercel project linking is currently blocked because the connected Vercel account requires a GitHub Login Connection before this repository can be linked.
 
 ## Current status
 
-**VPN dashboard / control-plane UX prototype.** Login, server-selection, connection-state, and dashboard interactions are represented. Real authentication, VPN tunneling, traffic routing, encryption, DNS handling, subscriptions, and gateway infrastructure are not implemented by the current repository.
-
-## Product intent
-
-The project explores the user-facing control surface of a VPN product: sign in, understand available servers, select a location, connect, and see connection state clearly. The next engineering milestone is connecting this interface to a real native VPN client / gateway architecture.
-
-## License
-
-See repository files for licensing information.
+**PARTIAL / build-verified UX prototype.** Core misleading states were removed and the repository passes install, typecheck, lint, and build. Real VPN functionality remains intentionally absent until a native networking architecture exists.
