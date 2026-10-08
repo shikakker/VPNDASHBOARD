@@ -1,6 +1,6 @@
 # Product Completion Status
 
-Status: IN PROGRESS — code and CI are green; isolated Vercel runtime verification is running.
+Status: PARTIAL — code and CI are green; Vercel Git integration is externally blocked.
 
 ## Completed
 1. Removed fake email/password collection from the unauthenticated demo.
@@ -28,11 +28,11 @@ Status: IN PROGRESS — code and CI are green; isolated Vercel runtime verificat
 - GitHub Actions: PASS
 - PR mergeability: PASS
 - Vercel Git linking: BLOCKED by missing GitHub Login Connection
-- Isolated Vercel deployment: IN PROGRESS
+- Isolated Vercel deployment: BLOCKED with `git_info_fail` before platform build
 - Production promotion: NOT PERFORMED
 
 ## Remaining blocker
-BLOCKED ONLY BY: Vercel GitHub Login Connection for normal repository linking. This does not block the isolated verification deployment.
+BLOCKED ONLY BY: Vercel GitHub Login Connection for normal repository linking. Direct Git-source deployment also fails before build with `git_info_fail`.
 
 ## Next action
-Confirm isolated deployment READY + HTTP 200, then record runtime verification.
+Add a GitHub Login Connection to the Vercel account/team, then create a normal preview deployment and perform browser runtime QA.
