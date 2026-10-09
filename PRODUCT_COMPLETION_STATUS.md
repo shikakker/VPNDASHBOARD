@@ -36,3 +36,9 @@ BLOCKED ONLY BY: Vercel GitHub Login Connection for normal repository linking. D
 
 ## Next action
 Add a GitHub Login Connection to the Vercel account/team, then create a normal preview deployment and perform browser runtime QA.
+
+## Verification update — 2026-10-09
+- GitHub Actions on PR head: PASS (install, typecheck, lint, build).
+- Vercel GitHub Login Connection remains unavailable for linked preview; no browser QA has been performed.
+- Connection indicator and security controls are intentionally simulated, not OS-level VPN functionality.
+- Status: PARTIAL / verified UI build, unverified live VPN functionality (not implemented).
