@@ -42,3 +42,9 @@ Add a GitHub Login Connection to the Vercel account/team, then create a normal p
 - Vercel GitHub Login Connection remains unavailable for linked preview; no browser QA has been performed.
 - Connection indicator and security controls are intentionally simulated, not OS-level VPN functionality.
 - Status: PARTIAL / verified UI build, unverified live VPN functionality (not implemented).
+
+## Verification update — 2026-10-10
+- GitHub Actions: **PASS** — install, typecheck, lint, and production build all completed successfully.
+- Vercel branch deployment still fails before build with `git_info_fail`.
+- Creating a correctly Git-linked Vercel project is externally blocked because the Vercel account/team has no GitHub Login Connection.
+- Root cause is therefore Vercel Git identity/linking, not source build correctness.
