@@ -48,3 +48,12 @@ Add a GitHub Login Connection to the Vercel account/team, then create a normal p
 - Vercel branch deployment still fails before build with `git_info_fail`.
 - Creating a correctly Git-linked Vercel project is externally blocked because the Vercel account/team has no GitHub Login Connection.
 - Root cause is therefore Vercel Git identity/linking, not source build correctness.
+
+## Verification update — 2026-10-11
+- Identified an actual interaction bug: selecting a sample server immediately marked the VPN UI simulation connected.
+- Added pure simulation state transitions and five regression tests.
+- Verified RED in Actions: missing transition functions failed assertions (after correcting Node 20 → Node 22, because the test runner uses native TypeScript stripping).
+- Fixed the hook and application wiring: selecting a server resets the simulated connection; only an explicit toggle starts or stops it.
+- Verified GREEN at commit `5e704f7f791c3fb10b4bb0167e74ff5a0a02783e`: **5/5 tests PASS**, `npm ci` PASS, TypeScript PASS, ESLint PASS, Vite build PASS.
+- GitHub Actions run: https://github.com/shikakker/VPNDASHBOARD/actions/runs/38140705523
+- Remaining: Vercel GitHub Login Connection and browser QA. Real VPN tunneling remains outside this React-only prototype.
