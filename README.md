@@ -9,7 +9,7 @@ Frontend control-plane prototype for VPN product UX: server selection, connectio
 ```text
 open demo dashboard
   -> choose a sample server
-  -> simulate connection state
+  -> explicitly start / stop the connection simulation
   -> inspect disabled security-setting concepts
 ```
 
@@ -19,7 +19,7 @@ The previous fake sign-in form was removed because it collected email/password-l
 
 - explicit demo entry instead of fake credential collection;
 - server selection wired through the real component contract;
-- simulated connection / disconnection state;
+- separate server selection and explicitly started/stopped connection simulation;
 - clear warning that traffic is not encrypted or routed;
 - static server load / ping values labelled as demo telemetry;
 - keyboard-accessible server selection buttons;
@@ -52,6 +52,7 @@ A real VPN product requires a native/system client or service. A browser React a
 
 ```bash
 npm ci
+npm run test
 npm run typecheck
 npm run lint
 npm run build
@@ -66,9 +67,10 @@ Product-completion branch:
 ai/product-completion/vpndashboard
 ```
 
-GitHub Actions verified the current runtime changes:
+GitHub Actions verified PR #3 at commit `5e704f7`: 
 
 ```text
+unit tests  5/5 PASS
 npm ci      PASS
 typecheck   PASS
 lint        PASS
