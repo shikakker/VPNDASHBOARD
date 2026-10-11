@@ -1,23 +1,25 @@
 import { useState, useCallback } from 'react';
 import type { Server } from '../types/server';
+import { selectSampleServer, toggleSimulation, type VpnSimulationState } from '../lib/vpnSimulation';
 
 export function useVPNConnection() {
-  const [isConnected, setIsConnected] = useState(false);
-  const [selectedServer, setSelectedServer] = useState<Server | null>(null);
+  const [state, setState] = useState<VpnSimulationState>({
+    selectedServer: null,
+    isConnected: false,
+  });
 
-  const connect = useCallback((server: Server) => {
-    setSelectedServer(server);
-    setIsConnected(true);
+  const selectServer = useCallback((server: Server) => {
+    setState(current => selectSampleServer(current, server));
   }, []);
 
-  const disconnect = useCallback(() => {
-    setIsConnected(false);
+  const toggle = useCallback(() => {
+    setState(current => toggleSimulation(current));
   }, []);
 
   return {
-    isConnected,
-    selectedServer,
-    connect,
-    disconnect
+    isConnected: state.isConnected,
+    selectedServer: state.selectedServer,
+    selectServer,
+    toggle,
   };
 }
