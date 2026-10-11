@@ -66,3 +66,8 @@ Add a GitHub Login Connection to the Vercel account/team, then create a normal p
 - Therefore the remaining Vercel failure is an external account-linking blocker, not a source build failure.
 - Status remains PARTIAL; no production promotion performed.
 
+## Verification update — 2026-10-11 (latest)
+- Exact PR head: `5ae0de97d32a33de837a4a8692217b04f09125b4`.
+- GitHub Actions PASS: install, regression tests, typecheck, lint, build. Vercel isolated project fails before build with git_info_fail; source build is independently green.
+- Preview: N/A
+- Production promotion: NOT PERFORMED.
