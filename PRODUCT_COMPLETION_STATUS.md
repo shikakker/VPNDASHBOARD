@@ -71,3 +71,14 @@ Add a GitHub Login Connection to the Vercel account/team, then create a normal p
 - GitHub Actions PASS: install, regression tests, typecheck, lint, build. Vercel isolated project fails before build with git_info_fail; source build is independently green.
 - Preview: N/A
 - Production promotion: NOT PERFORMED.
+## Latest verification — 2026-10-12
+- Exact PR head: ba88bf99a2d1cfd6b3d52b476ba0bcfd6c0442c8
+- GitHub Actions install: PASS
+- Unit tests: PASS
+- Typecheck: PASS
+- Lint: PASS
+- Build: PASS
+- Vercel Git-linked verification: BLOCKED ONLY BY missing GitHub Login Connection in the Vercel account; manual Git deployment returns git_info_fail before build.
+- Existing production project/domain: NOT PROMOTED OR MODIFIED
+
+Status remains PARTIAL only because the required Vercel preview cannot clone this repository until the account GitHub connection is restored.
