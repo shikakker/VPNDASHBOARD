@@ -1,39 +1,26 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LoginForm } from './components/auth/LoginForm';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { useVPNConnection } from './hooks/useVPNConnection';
-import type { Server } from './types/server';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { isConnected, selectedServer, connect, disconnect } = useVPNConnection();
-
-  const handleServerSelect = (server: Server) => {
-    connect(server);
-  };
-
-  const handleToggleConnection = () => {
-    if (isConnected) {
-      disconnect();
-    } else if (selectedServer) {
-      connect(selectedServer);
-    }
-  };
+  const { isConnected, selectedServer, selectServer, toggle } = useVPNConnection();
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <LoginForm onLogin={() => setIsLoggedIn(true)} />
       </div>
     );
   }
 
   return (
-    <Dashboard 
+    <Dashboard
       isConnected={isConnected}
       selectedServer={selectedServer}
-      onToggleConnection={handleToggleConnection}
-      onServerSelect={handleServerSelect}
+      onToggleConnection={toggle}
+      onServerSelect={selectServer}
     />
   );
 }
